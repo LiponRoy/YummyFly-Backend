@@ -1,15 +1,19 @@
-import express from 'express';
-// import itemRoutes from './routes/itemRoutes';
+// export default app;
+import express, { Application, Request, Response } from "express";
+import cors from "cors";
 import { errorHandler } from './middlewares/errorHandler';
 
-const app = express();
+const app: Application = express();
 
+app.use(cors());
 app.use(express.json());
 
-// Routes
-// app.use('/api/items', itemRoutes);
+// Test route
+app.get("/", (req: Request, res: Response) => {
+  res.status(200).json({ message: "Test route is working!" });
+});
 
-// Global error handler (should be after routes)
+// Error handling middleware
 app.use(errorHandler);
 
 export default app;

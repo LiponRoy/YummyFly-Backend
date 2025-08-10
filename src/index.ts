@@ -1,6 +1,13 @@
-import app from './app';
-import config from './config/config';
+import app from "./app";
+import { connectDB } from "./utils/connectDB";
+import { PORT } from "./config";
 
-app.listen(config.port, () => {
-  console.log(`Server running on port ${config.port}`);
-});
+const startServer = async () => {
+  await connectDB();
+
+  app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+  });
+};
+
+startServer();
