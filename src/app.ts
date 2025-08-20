@@ -3,6 +3,7 @@ import express, { Application, Request, Response } from "express";
 import cors from "cors";
 import { errorHandler } from './middlewares/errorHandler';
 import { productRoutes } from "./modules/products/product.route";
+import { orderRoutes } from "./modules/SSLPayment/ssl.route";
 
 const app: Application = express();
 
@@ -15,6 +16,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.use('/api/v1', productRoutes); 
+app.use('/api/v1', orderRoutes); 
 
 // Error handling middleware
 app.use(errorHandler);
