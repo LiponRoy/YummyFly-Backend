@@ -1,6 +1,7 @@
 import app from "./app";
 import { connectDB } from "./utils/connectDB";
 import { PORT } from "./config";
+const SSLCommerzPayment = require('sslcommerz-lts')
 
 const startServer = async () => {
   await connectDB();

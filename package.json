@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "mongoose": "^8.17.1"
+    "mongoose": "^8.17.1",
+    "sslcommerz-lts": "^1.2.0"
   }
 }
