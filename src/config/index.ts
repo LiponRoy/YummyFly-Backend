@@ -1,7 +1,16 @@
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
+import path from 'path';
 
-dotenv.config();
+const envPath = path.join(process.cwd(), '.env');
 
-export const PORT = process.env.PORT || 5000;
-export const MONGO_URI = process.env.MONGO_URI || "";
-export const NODE_ENV = process.env.NODE_ENV || "development";
+dotenv.config({ path: envPath });
+
+export default {
+PORT:process.env.PORT || 5000,
+MONGO_URI:process.env.MONGO_URI || "",
+NODE_ENV:process.env.NODE_ENV || "development",
+
+sslc_STORE_ID:process.env.SSLC_STORE_ID,
+sslc_STORE_PASS:process.env.SSLC_STORE_PASS,
+
+}
