@@ -6,7 +6,7 @@ const orderSchema = new Schema<IOrder>(
     tran_id: { type: String, required: true, unique: true },
     amount: { type: Number, required: true },
     currency: { type: String, required: true, default: "BDT" },
-    status: {
+    paymentStatus: {
       type: String,
       enum: ["INITIATED", "SUCCESS", "FAILED", "CANCELLED"],
       default: "INITIATED",

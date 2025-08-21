@@ -33,7 +33,7 @@ export interface IOrder extends Document {
   tran_id: string;
   amount: number;
   currency: string;
-  status: "INITIATED" | "SUCCESS" | "FAILED" | "CANCELLED";
+  paymentStatus: "INITIATED" | "SUCCESS" | "FAILED" | "CANCELLED";
   cus_name: string;
   cus_email: string;
   total_product: number;
