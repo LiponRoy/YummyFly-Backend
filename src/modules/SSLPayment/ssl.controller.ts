@@ -118,7 +118,7 @@ export const PaymentOrder = catchAsync(async (req: Request, res: Response) => {
 
     return res.json({ url: GatewayPageURL }); // frontend will redirect
   } else {
-    return res.status(400).json({ message: "Payment gateway init failed" });
+    return res.status(400).json({ message: "Payment gateway init failed." });
   }
 });
 
