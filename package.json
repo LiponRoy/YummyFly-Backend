@@ -33,6 +33,7 @@
     "cors": "^2.8.5",
     "http-status": "^2.1.0",
     "mongoose": "^8.17.1",
+    "redis": "^5.8.2",
     "sslcommerz-lts": "^1.2.0",
     "zod": "^4.0.17"
   }
