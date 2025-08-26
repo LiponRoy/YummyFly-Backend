@@ -15,7 +15,7 @@ const createRestaurant = catchAsync(
     const restaurantData: IRestaurant = req.body;
 
     const newRestaurant =
-      await FoodItemServices?.createRestaurant(restaurantData);
+      await FoodItemServices?.createRestaurantService(restaurantData);
 
     if (!newRestaurant) {
       throw new ApiError(
@@ -33,6 +33,22 @@ const createRestaurant = catchAsync(
   },
 );
 
+const getAllRestaurants = catchAsync(async (req: Request, res: Response) => {
+  const restaurants = await FoodItemServices.getAllRestaurantsService();
+
+  if (!restaurants) {
+    throw new ApiError(404, 'Restaurants not found');
+  }
+
+  return sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'Restaurants fetched successfully',
+    data: restaurants,
+  });
+});
+
 export const FoodItemController = {
   createRestaurant,
+  getAllRestaurants,
 };

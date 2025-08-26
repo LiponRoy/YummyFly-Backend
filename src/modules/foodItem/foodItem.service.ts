@@ -7,7 +7,9 @@ import { IRestaurant } from './foodItem.types';
 // param payload - Restaurant data
 // returns The created restaurant document
 
-const createRestaurant = async (payload: IRestaurant): Promise<IRestaurant> => {
+const createRestaurantService = async (
+  payload: IRestaurant,
+): Promise<IRestaurant> => {
   const newRestaurant = await Restaurant.create(payload);
 
   if (!newRestaurant) {
@@ -17,6 +19,19 @@ const createRestaurant = async (payload: IRestaurant): Promise<IRestaurant> => {
   return newRestaurant;
 };
 
+// Getting all restaurants from the database
+// returns An array of restaurant documents
+const getAllRestaurantsService = async () => {
+  const restaurants = await Restaurant.find();
+
+  if (!restaurants || restaurants.length === 0) {
+    return null;
+  }
+
+  return restaurants;
+};
+
 export const FoodItemServices = {
-  createRestaurant,
+  createRestaurantService,
+  getAllRestaurantsService,
 };
