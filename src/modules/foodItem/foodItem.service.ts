@@ -3,6 +3,7 @@ import ApiError from '../../errors/ApiError';
 import { Restaurant } from './foodItem.model';
 import { IRestaurant } from './foodItem.types';
 import mongoose from 'mongoose';
+import { getRedisClient } from '../../utils/redisClient';
 
 // create a new restaurant in the database
 // param payload - Restaurant data
@@ -23,11 +24,37 @@ const createRestaurantService = async (
 // Getting all restaurants from the database
 // returns An array of restaurant documents
 const getAllRestaurantsService = async () => {
+  const CACHE_KEY = `${process.env.REDIS_CACHE_KEY_PREFIX}:restaurants`;
+  const TTL = parseInt(process.env.REDIS_TTL || '60', 10); // seconds
+  const start = Date.now(); // measure request time
+
+  // Get Redis client
+  const redis = await getRedisClient();
+
+  // Check cache
+  const cachedData: any = await redis.get(CACHE_KEY);
+
+  if (cachedData) {
+    console.log('🚀 Cache HIT');
+    console.log(`⏱ Redis fetch took: ${Date.now() - start}ms`);
+
+    const restaurants = JSON.parse(cachedData);
+
+    return restaurants;
+  }
+
+  console.log('🐢 Cache MISS');
+
+  // Fetch from DB
   const restaurants = await Restaurant.find();
 
   if (!restaurants || restaurants.length === 0) {
-    return null;
+    throw new ApiError(404, 'Restaurants not found');
   }
+  // Cache the data
+  await redis.setEx(CACHE_KEY, TTL, JSON.stringify(restaurants));
+
+  console.log(`⏱ DB fetch + cache set took: ${Date.now() - start}ms`);
 
   return restaurants;
 };
