@@ -8,7 +8,16 @@ import { restaurantRoutes } from './modules/foodItem/foodItem.route';
 
 const app: Application = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      'http://localhost:3000',        // local development
+      'https://yummy-fly-36.vercel.app', // your deployed frontend
+    ],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 // Test route
