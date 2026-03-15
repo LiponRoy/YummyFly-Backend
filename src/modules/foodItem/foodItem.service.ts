@@ -1,4 +1,3 @@
-
 import httpStatus from 'http-status';
 import ApiError from '../../errors/ApiError';
 import { Restaurant } from './foodItem.model';
