@@ -5,18 +5,19 @@ import { productRoutes } from './modules/products/product.route';
 import { orderRoutes } from './modules/SSLPayment/ssl.route';
 import globalErrorHandler from './middlewares/globalErrorHandler';
 import { restaurantRoutes } from './modules/foodItem/foodItem.route';
+import { deliveryHeroRoutes } from './modules/deliveryHero/deliveryHero.route';
 
 const app: Application = express();
 
 app.use(
   cors({
     origin: [
-      'http://localhost:3000',        // local development
+      'http://localhost:3000', // local development
       'https://yummy-fly-36.vercel.app', // your deployed frontend
     ],
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
     credentials: true,
-  })
+  }),
 );
 app.use(express.json());
 
@@ -28,6 +29,7 @@ app.get('/', (req: Request, res: Response) => {
 app.use('/api/v1/product', productRoutes);
 app.use('/api/v1/order', orderRoutes);
 app.use('/api/v1/restaurant', restaurantRoutes);
+app.use('/api/v1/deliveryHero', deliveryHeroRoutes);
 
 // error middleware ...
 app.use(globalErrorHandler);

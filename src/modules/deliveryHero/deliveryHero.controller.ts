@@ -33,6 +33,6 @@ const createDeliveryHero = catchAsync(
   },
 );
 
-export const FoodItemController = {
+export const DeliveryHeroController = {
   createDeliveryHero,
 };
