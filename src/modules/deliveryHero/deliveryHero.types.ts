@@ -1,4 +1,4 @@
-interface DeliveryHero {
+export interface IDeliveryHero {
   firstName: string;
   lastName: string;
   mobileNumber: string;
